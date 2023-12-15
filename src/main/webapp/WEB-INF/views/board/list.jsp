@@ -53,13 +53,13 @@
 							<div class="pull-right">
 								<ul class="pagination">
 									
-									<c:if test="${pageMaker.prev }">
+									<c:if test="${pageMaker.prev }"> <!-- startPage가 1보다 크다면 조건문 발동 -->
 										<li	class="paginate_button previous">
-											<a href="${pageMaker.startPage-1 }">Previous</a>
+											<a href="${pageMaker.startPage-1 }">Previous</a> <!-- startPage가 1보다 크면 11, 11 - 10으로 이전페이지로 이동 -->
 										</li>
 									</c:if>
 								
-									<c:forEach	var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+									<c:forEach	var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }"> <!-- num이라는 변수명으로 startPage(1)에서 endPage(10)까지 1씩 증가하면서 생성 -->
 										<li class="paginate_button ${pageMaker.cri.pageNum == num?'active':'' }" >
 											<a href="${num }">
 												${num }
@@ -76,10 +76,13 @@
 							</div>
 							<!-- end Pagination -->
 							
+							<!-- 페이지의 데이터를 보내기 위한 form -->
 							<form action="/board/list" id="actionForm" method="get">
 								<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"> <!-- 자바스크립트에서 동적으로 바뀌도록 설정했으므로 value생략 가능 -->
 								<input type="hidden" name="amount" value="${pageMaker.cri.amount }"> <!-- 자바스크립트에서 pageNum은 다루므로 생략 가능하지만 amount는 다루지않으므로 value 초기값 필요 -->
 							</form>
+							<!-- 페이지의 데이터를 보내기 위한 form end -->
+							
 							
 							<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
